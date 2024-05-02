@@ -12,25 +12,25 @@ public class Main {
 
         while (true) {
             displayHomeScreen();
-            int choice = scanner.nextInt();
+            char choice = scanner.next().charAt(0);
 
             switch (choice) {
-                case 1:
-                    // Option 1: View Transactions
+                case 'D':
+                    // Option D: View Transactions
                     System.out.println("Viewing transactions...");
-                    viewTransactions();
-                    break;
-                case 2:
-                    // Option 2: Add Transaction
-                    System.out.println("Adding a transaction...");
                     addTransaction(scanner);
                     break;
-                case 3:
-                    // Option 3: Generate Reports
-                    System.out.println("Generating reports...");
+                case 'P':
+                    // Option P: Make a Payment
+                    System.out.println("Making a payment...");
+                    addTransaction(scanner);
                     break;
-                case 4:
-                    // Option 4: Exit
+                case 'L':
+                    // Option L: Display Ledger
+                    System.out.println("Displaying Ledger...");
+                    break;
+                case 'X':
+                    // Option X: Exit
                     System.out.println("Exiting the application.");
                     scanner.close();
                     System.exit(0);
@@ -41,13 +41,14 @@ public class Main {
     }
 
     private static void displayHomeScreen() {
-        System.out.println("=== Accounting Ledger Application ===");
-        System.out.println("1. View Transactions");
-        System.out.println("2. Add Transaction");
-        System.out.println("3. Generate Reports");
-        System.out.println("4. Exit");
+        System.out.println("=== Home Screen ===");
+        System.out.println("D. View Transactions");
+        System.out.println("P. Make a Payment");
+        System.out.println("L. Display Ledger");
+        System.out.println("X. Exit");
         System.out.print("Choose an option: ");
     }
+
 
     private static void viewTransactions() {
         try (BufferedReader reader = new BufferedReader(new FileReader("transactions.csv"))) {
@@ -65,17 +66,18 @@ public class Main {
         try (BufferedWriter writer = new BufferedWriter(new FileWriter("transactions.csv", true))) {
             // Prompt user for transaction details
             scanner.nextLine(); // Consume newline character left by previous nextInt()
-            System.out.print("Enter transaction details (e.g., date, amount, description): ");
+            System.out.print("Enter payment details (e.g., date, amount, description): ");
             String transactionDetails = scanner.nextLine();
 
             // Write transaction details to CSV file
             writer.write(transactionDetails);
             writer.newLine();
 
-            System.out.println("Transaction added successfully.");
+            System.out.println("Payment added successfully.");
         } catch (IOException e) {
-            System.out.println("An error occurred while writing to the file.");
+            System.out.println("An error occurred while writing to make payment :( ");
             e.printStackTrace();
         }
     }
 }
+
