@@ -18,7 +18,7 @@ public class Main {
                 case 'D':
                     // Option D: View Transactions
                     System.out.println("Viewing transactions...");
-                    addTransaction(scanner);
+                    viewTransactions();
                     break;
                 case 'P':
                     // Option P: Make a Payment
@@ -49,7 +49,6 @@ public class Main {
         System.out.print("Choose an option: ");
     }
 
-
     private static void viewTransactions() {
         try (BufferedReader reader = new BufferedReader(new FileReader("transactions.csv"))) {
             String line;
@@ -79,5 +78,39 @@ public class Main {
             e.printStackTrace();
         }
     }
+
+    private static void displayLedgerMenu(Scanner scanner) {
+        System.out.println("=== Ledger Menu ===");
+        System.out.println("A. All Transactions");
+        System.out.println("D. Deposits");
+        System.out.println("P. Payments");
+        System.out.println("R. Reports");
+        System.out.println("H. Go Back to Home Screen");
+        System.out.print("Choose an option: ");
+        char choice = scanner.next().charAt(0);
+
+        switch (choice) {
+            case 'A':
+                System.out.println("Viewing all transactions...");
+                break;
+            case 'D':
+                System.out.println("Viewing deposits...");
+                break;
+            case 'P':
+                System.out.println("Viewing payments...");
+                break;
+            case 'R':
+                System.out.println("Generating reports...");
+                // Implement the logic to generate reports
+                break;
+            case 'H':
+                System.out.println("Going back to the home screen...");
+                break;
+            default:
+                System.out.println("Invalid choice. Please try again.");
+                break;
+        }
+    }
 }
+
 
